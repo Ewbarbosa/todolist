@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { StyleSheet, Text, TextInput, View, SafeAreaView, StatusBar, TouchableOpacity, FlatList, Modal } from 'react-native';
-import * as Animatable from 'react-native-animatable'
+import * as Animatable from 'react-native-animatable';
+
+{/* IMPORT PARA QUE AS TASK SEJAM SALVAS MESMO SE FECHAR O APP */ }
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 {/* IMPORT PRA UTILIZAR ICONES */ }
 import { Ionicons } from '@expo/vector-icons'
@@ -17,7 +20,31 @@ export default function App() {
   const [newTask, setNewTask] = useState('');
   const [telaCadastro, setTeclaCadastro] = useState(false);
 
-  function taskAdd(){
+  {/* FUNCAO UTILIZANDO ASYNCSTORAGE PARA BUSCAR AS TAREFAS AO INICIAR O APP */ }
+  useEffect(() => {
+    async function carregarTask() {
+      const taskStorage = await AsyncStorage.getItem('@task');
+
+      if (taskStorage) {
+        setTask(JSON.parse(taskStorage));
+      }
+    }
+
+    carregarTask();
+  }, []
+  )
+
+  {/* FUNCAO UTILIZANDO ASYNCSTORAGE PARA SALVAR AS TAREFAS ALTERADAS */}
+  useEffect(() => {
+     async function savarTasks(){
+      await AsyncStorage.setItem('@task', JSON.stringify(task))
+     }
+
+     savarTasks();
+  }, [task])
+
+  {/* FUNCAO PARA ADICIONAR UMA NOVA TASK */ }
+  function taskAdd() {
     if (newTask === '') return;
 
     const data = {
@@ -30,7 +57,15 @@ export default function App() {
     setNewTask('');
   }
 
+
+  {/* FUNCAO PARA RETORNAR TODAS AS TAREFAS QUE É DIFERENTE DA QUE FOI CLICADA*/ }
+  const TaskDelete = useCallback((data) => {
+    const find = task.filter(r => r.key !== data.key);
+    setTask(find);
+  })
+
   return (
+
     <SafeAreaView style={styles.container}>
 
       <View style={styles.container}>
@@ -42,7 +77,7 @@ export default function App() {
         showsHorizontalScrollIndicator={false}
         data={task}
         keyExtractor={(item) => String(item.key)}
-        renderItem={({ item }) => <TaskList data={item} />}
+        renderItem={({ item }) => <TaskList data={item} TaskDelete={TaskDelete} />}
       />
 
       {/* Aqui é a tela de cadastro, a propriedade visible recebe a funcao telaCadastro*/}
@@ -96,7 +131,7 @@ export default function App() {
   );
 }
 
-{/* AQUI FICA OS ESTILOS DOS COMPONENTES*/}
+{/* AQUI FICA OS ESTILOS DOS COMPONENTES*/ }
 
 const styles = StyleSheet.create({
   container: {
