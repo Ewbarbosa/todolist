@@ -40,7 +40,7 @@ export default function App() {
       await AsyncStorage.setItem('@task', JSON.stringify(task))
      }
 
-     savarTasks();
+     savarTasks()
   }, [task])
 
   {/* FUNCAO PARA ADICIONAR UMA NOVA TASK */ }
