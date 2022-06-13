@@ -132,7 +132,6 @@ export default function App() {
 }
 
 {/* AQUI FICA OS ESTILOS DOS COMPONENTES*/ }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,

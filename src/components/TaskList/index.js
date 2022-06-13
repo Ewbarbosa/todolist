@@ -1,29 +1,28 @@
 import React from "react";
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
-import {Ionicons} from '@expo/vector-icons'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { Ionicons } from '@expo/vector-icons'
 import * as Animatable from 'react-native-animatable'
 
-export default function TaskList({data, TaskDelete}){
-    return(
+export default function TaskList({ data, TaskDelete }) {
+    return (
 
         <Animatable.View style={styles.container}
-        animation='bounceIn'
+            animation='bounceIn'
         >
             <TouchableOpacity onPress={() => TaskDelete(data)}>
-                <Ionicons name='md-checkmark-circle' size={30} color='#121212'/>
+                <Ionicons name='md-checkmark-circle' size={30} color='#121212' />
             </TouchableOpacity>
 
             <View>
                 <Text style={styles.txt}>{data.task}</Text>
             </View>
 
-        </Animatable.View>   
-        
+        </Animatable.View>
     )
 }
 
 const styles = StyleSheet.create({
-    container:{
+    container: {
         flex: 1,
         margin: 8,
         flexDirection: 'row',
@@ -39,7 +38,7 @@ const styles = StyleSheet.create({
             height: 3
         }
     },
-    txt:{
+    txt: {
         color: '#000000',
         fontSize: 20,
         paddingLeft: 10,
