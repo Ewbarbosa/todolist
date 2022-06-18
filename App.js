@@ -57,7 +57,6 @@ export default function App() {
     setNewTask('');
   }
 
-
   {/* FUNCAO PARA RETORNAR TODAS AS TAREFAS QUE É DIFERENTE DA QUE FOI CLICADA*/ }
   const TaskDelete = useCallback((data) => {
     const find = task.filter(r => r.key !== data.key);
@@ -68,9 +67,9 @@ export default function App() {
 
     <SafeAreaView style={styles.container}>
 
-      <View style={styles.container}>
+      <View>
         <Text style={styles.title}>Minhas Tarefas</Text>
-      </View>
+      </View>      
 
       <FlatList
         marginHorizontal={10}
@@ -181,17 +180,16 @@ const styles = StyleSheet.create({
     marginTop: 15,
   },
   input: {
-    fontSize: 15,
+    fontSize: 20,
     marginLeft: 10,
     marginRight: 10,
     marginTop: 30,
     backgroundColor: '#fff',
     padding: 9,
-    height: 80,
+    height: 220,
     textAlignVertical: 'top',
     color: '#000',
-    borderRadius: 10,
-    fontSize: 20
+    borderRadius: 10
   },
   btnNovaTarefa: {
     backgroundColor: '#fff',

@@ -40,8 +40,8 @@ const styles = StyleSheet.create({
     },
     txt: {
         color: '#000000',
-        fontSize: 20,
-        paddingLeft: 10,
-        paddingRight: 15
+        fontSize: 18,
+        paddingLeft: 20,
+        paddingRight: 35
     }
 })
