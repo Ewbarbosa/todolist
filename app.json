@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Todo",
-    "slug": "Todo",
+    "name": "Tarefas",
+    "slug": "Tarefas",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,7 +25,9 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.ewbarbosa.Todo"
+      "permissions":[
+      ],
+      "package": "com.ewbarbosa.Tarefas"
     },
     "web": {
       "favicon": "./assets/favicon.png"
